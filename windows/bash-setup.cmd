@@ -70,41 +70,41 @@ if exist "%SCRIPT_DIR%default.simba" (
         echo ^(* To start simply double click the green play button. *^)
         echo.
         echo begin
-        echo   SimbaRunInTab^(ScriptPath + 'bash-launcher.simba'^);
+        echo   SimbaRunInTab^(ScriptPath + 'BashLauncher.simba'^);
         echo end.
     )
 )
 
 (
     echo [BigWaspBackup/SRL-B]
-    echo Name=SRL-T
-    echo Templates=%SimbaPath%\Includes\SRL-T\templates
+    echo Name=SRL-B
+    echo Templates=%SimbaPath%\Includes\SRL-B\templates
     echo.
     echo [BigWaspBackup/BashLib]
-    echo Name=WaspLib
-    echo Templates=%SimbaPath%\Includes\WaspLib\templates
+    echo Name=BashLib
+    echo Templates=%SimbaPath%\Includes\BashLib\templates
 ) > "%SimbaPath%\Data\packages.ini"
 copy /Y "%SimbaPath%\Data\packages.ini" "%SimbaPath%\Data\packages\packages.ini" >nul
 
-echo Installing SRL-B as SRL-T...
+echo Installing SRL-B...
 curl.exe -sL -o "%TEMP%\srl-b.zip" "https://github.com/BigWaspBackup/SRL-B/archive/refs/heads/master.zip"
 tar -xf "%TEMP%\srl-b.zip" -C "%TEMP%"
 del "%TEMP%\srl-b.zip" >nul 2>&1
 for /d %%D in ("%TEMP%\SRL-B-*") do (
-    move /Y "%%~fD" "%SimbaPath%\Includes\SRL-T" >nul
+    move /Y "%%~fD" "%SimbaPath%\Includes\SRL-B" >nul
 )
 
-echo Installing BashLib as WaspLib...
+echo Installing BashLib...
 curl.exe -sL -o "%TEMP%\bashlib.zip" "https://github.com/BigWaspBackup/BashLib/archive/refs/heads/master.zip"
 tar -xf "%TEMP%\bashlib.zip" -C "%TEMP%"
 del "%TEMP%\bashlib.zip" >nul 2>&1
 for /d %%D in ("%TEMP%\BashLib-*") do (
-    move /Y "%%~fD" "%SimbaPath%\Includes\WaspLib" >nul
+    move /Y "%%~fD" "%SimbaPath%\Includes\BashLib" >nul
 )
 
-echo Installing B.A.S.H Launcher as bash-launcher.simba...
-curl.exe -sL -o "%SimbaPath%\Scripts\bash-launcher.simba" "https://raw.githubusercontent.com/BigAussie/BASH/main/B.A.S.H%%20Launcher.simba"
-if not exist "%SimbaPath%\Scripts\bash-launcher.simba" (
+echo Installing B.A.S.H Launcher as BashLauncher.simba...
+curl.exe -sL -o "%SimbaPath%\Scripts\BashLauncher.simba" "https://raw.githubusercontent.com/BigAussie/BASH/main/B.A.S.H%%20Launcher.simba"
+if not exist "%SimbaPath%\Scripts\BashLauncher.simba" (
     echo [ERROR] Failed to download B.A.S.H Launcher
     if "%SILENT%"=="0" pause
     exit /B 1
@@ -118,7 +118,7 @@ powershell -NoProfile -Command ^
 
 echo.
 echo Installation complete.
-echo Launcher path: %SimbaPath%\Scripts\bash-launcher.simba
+echo Launcher path: %SimbaPath%\Scripts\BashLauncher.simba
 echo Discord: https://discord.gg/qsmKs5uKfR
 echo.
 if "%SILENT%"=="0" pause

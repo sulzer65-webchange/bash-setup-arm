@@ -442,7 +442,12 @@ exit /b
 call :Log "[INFO] Restoring backed up credentials and configs..."
 if exist "%backupSessionPath%\Simba\credentials.simba" copy /y "%backupSessionPath%\Simba\credentials.simba" "%simbaPath%\" >> "%logFile%" 2>&1
 if exist "%backupSessionPath%\Simba\Configs" xcopy /s /e /y "%backupSessionPath%\Simba\Configs" "%simbaPath%\Configs\" >> "%logFile%" 2>&1
-if exist "%backupSessionPath%\Simba\Includes\WaspLib\overrides.simba" xcopy /y /i "%backupSessionPath%\Simba\Includes\WaspLib\overrides.simba" "%simbaPath%\Includes\WaspLib\" >> "%logFile%" 2>&1
+if exist "%backupSessionPath%\Simba\Includes\BashLib\overrides.simba" (
+    xcopy /y /i "%backupSessionPath%\Simba\Includes\BashLib\overrides.simba" "%simbaPath%\Includes\BashLib\" >> "%logFile%" 2>&1
+) else if exist "%backupSessionPath%\Simba\Includes\WaspLib\overrides.simba" (
+    if not exist "%simbaPath%\Includes\BashLib" mkdir "%simbaPath%\Includes\BashLib"
+    xcopy /y /i "%backupSessionPath%\Simba\Includes\WaspLib\overrides.simba" "%simbaPath%\Includes\BashLib\" >> "%logFile%" 2>&1
+)
 exit /b
 
 :CreateShortcuts

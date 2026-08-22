@@ -126,13 +126,13 @@ pub fn prepare_directory(
 
     if data_folder_created {
         let path = simba_dir.join("Data").join("default.simba");
-        let content = "(* Thank you for choosing B.A.S.H - BigAussie Script House *)\n(* Discord: https://discord.gg/qsmKs5uKfR *)\n\n(* To start simply double click the green play button. *)\n\nbegin\n  SimbaRunInTab(ScriptPath + 'bash-launcher.simba');\nend.\n";
+        let content = "(* Thank you for choosing B.A.S.H - BigAussie Script House *)\n(* Discord: https://discord.gg/qsmKs5uKfR *)\n\n(* To start simply double click the green play button. *)\n\nbegin\n  SimbaRunInTab(ScriptPath + 'BashLauncher.simba');\nend.\n";
         create_data_files(path, content, tx);
 
         let path = simba_dir.join("Data").join("packages.ini");
         let install_dir = simba_dir.to_str().expect("Failed.");
         let content = format!(
-            "[BigWaspBackup/SRL-B]\nName=SRL-T\nTemplates={}\\Includes\\SRL-T\\templates\n\n[BigWaspBackup/BashLib]\nName=WaspLib\nTemplates={}\\Includes\\WaspLib\\templates\n",
+            "[BigWaspBackup/SRL-B]\nName=SRL-B\nTemplates={}\\Includes\\SRL-B\\templates\n\n[BigWaspBackup/BashLib]\nName=BashLib\nTemplates={}\\Includes\\BashLib\\templates\n",
             install_dir, install_dir,
         );
         create_data_files(path, &content, tx);
@@ -349,7 +349,7 @@ pub fn download_launcher(
     if !download_file(
         client,
         "https://raw.githubusercontent.com/BigAussie/BASH/main/B.A.S.H%20Launcher.simba",
-        "bash-launcher.simba",
+        "BashLauncher.simba",
         &path,
         tx,
     ) {

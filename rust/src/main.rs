@@ -389,7 +389,7 @@ impl SimbaInstaller {
             "BigWaspBackup",
             "SRL-B",
             "SRL-B.zip",
-            "SRL-T",
+            "SRL-B",
             &simba_dir,
             &tx,
             &mut current_progress,
@@ -403,7 +403,7 @@ impl SimbaInstaller {
             "BigWaspBackup",
             "BashLib",
             "BashLib.zip",
-            "WaspLib",
+            "BashLib",
             &simba_dir,
             &tx,
             &mut current_progress,
@@ -452,7 +452,7 @@ impl SimbaInstaller {
             ui.label("Installation Finished");
             ui.allocate_ui_with_layout(vec2(320.0, 140.0), Layout::top_down(Align::Center), |ui| {
                 ui.label("You can start using Simba now!");
-                ui.label("Open bash-launcher.simba (or press play) to use B.A.S.H.");
+                ui.label("Open BashLauncher.simba (or press play) to use B.A.S.H.");
                 ui.add_space(10.0);
                 self.show_discord_link(ui);
                 ui.add_space(20.0);
