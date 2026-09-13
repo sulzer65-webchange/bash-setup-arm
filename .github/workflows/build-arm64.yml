@@ -1,0 +1,25 @@
+name: Build ARM64 Windows Installer
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-arm64:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-pc-windows-msvc
+
+      - name: Build for ARM64
+        working-directory: rust
+        run: cargo build --release --target aarch64-pc-windows-msvc
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bash-setup-arm64
+          path: rust/target/aarch64-pc-windows-msvc/release/bash-setup.exe
